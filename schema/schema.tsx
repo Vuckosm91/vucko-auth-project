@@ -17,8 +17,4 @@ export const registerSchema = yup.object().shape({
     .min(5)
     .matches(passwordRules, { message: "Please create a stronger password" })
     .required("Unesite lozinku"),
-  confirmPassword: yup
-    .string()
-    .oneOf([yup.ref("password")], "Passwords must match")
-    .required("Unesite lozinku jos jednom"),
 });
