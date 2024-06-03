@@ -14,12 +14,17 @@ import {
   FormRegister,
   H1StyledItalic,
   InhaltHolder,
+  InputDiv,
   InputParagraphStyled,
   InputStyled,
   LabelStyled,
   MainRegister,
+  OnClick,
   ParagraphStyled,
 } from "./loginFormStyled";
+import { useState } from "react";
+import { Visibility } from "@mui/icons-material";
+import { NotVisibleStyled, VisibleIconStyled } from "./muiFormStyled";
 
 const Register = () => {
   const { state, signIn, signOut } = useAuthContext();
@@ -42,6 +47,11 @@ const Register = () => {
       onSubmit,
       validationSchema: registerSchema,
     });
+
+  const [showPassword, setShowPassword] = useState(false);
+  const togglePasswordVisibility = () => {
+    setShowPassword((prevState) => !prevState);
+  };
 
   return (
     <>
@@ -87,15 +97,24 @@ const Register = () => {
                     <CheckIconStyledGreen />
                   ) : null}
                 </LabelStyled>
-                <InputStyled
-                  id="password"
-                  type="password"
-                  name="password"
-                  placeholder="Budi mastovit..."
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                ></InputStyled>
+                <InputDiv>
+                  <InputStyled
+                    id="password"
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Budi mastovit..."
+                    value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></InputStyled>
+                  <OnClick onClick={togglePasswordVisibility}>
+                    {showPassword ? (
+                      <VisibleIconStyled />
+                    ) : (
+                      <NotVisibleStyled />
+                    )}
+                  </OnClick>
+                </InputDiv>
                 {errors.password && touched.password && (
                   <ErrorParagraph>{errors.password}</ErrorParagraph>
                 )}
@@ -109,15 +128,24 @@ const Register = () => {
                     <ClearIconStyledRed />
                   ) : null}
                 </LabelStyled>
-                <InputStyled
-                  id="confirmPass"
-                  type="password"
-                  name="confirmPass"
-                  placeholder="Potvrdi sifru..."
-                  value={values.confirmPass}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                ></InputStyled>
+                <InputDiv>
+                  <InputStyled
+                    id="confirmPass"
+                    type={showPassword ? "text" : "password"}
+                    name="confirmPass"
+                    placeholder="Potvrdi sifru..."
+                    value={values.confirmPass}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                  ></InputStyled>
+                  <OnClick onClick={togglePasswordVisibility}>
+                    {showPassword ? (
+                      <VisibleIconStyled />
+                    ) : (
+                      <NotVisibleStyled />
+                    )}
+                  </OnClick>
+                </InputDiv>
                 {values.confirmPass !== values.password ? (
                   <InputParagraphStyled>
                     Proveri kako si nakucao sifru

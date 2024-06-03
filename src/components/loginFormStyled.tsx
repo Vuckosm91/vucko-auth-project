@@ -30,6 +30,13 @@ export const AppDiv = styled.div`
   border: 1px solid black;
 `;
 
+export const InputDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  width: 115%;
+`;
+
 export const MainRegister = styled.div`
   display: flex;
   flex-direction: row;
@@ -150,3 +157,5 @@ export const LinkTo = styled.a`
   font-size: 2rem;
   cursor: pointer;
 `;
+
+export const OnClick = styled.a``;
